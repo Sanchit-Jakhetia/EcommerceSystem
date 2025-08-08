@@ -1,16 +1,24 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
-connectDB();
 
 const app = express();
-app.use(express.json()); // For JSON parsing
+const PORT = process.env.PORT || 5000;
+
+// Middleware
+app.use(express.json());
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✅ Connected to MongoDB'))
+  .catch(err => console.error('❌ Connection error:', err));
 
 // Routes
-app.use('/api/users', userRoutes);
+app.use('/api/users', userRoutes); // API endpoint
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
