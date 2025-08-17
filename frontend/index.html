@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>User List</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecommerce - Login</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-  <h1>Users</h1>
-  <ul id="user-list"></ul>
+  <h1>Sign In</h1>
 
-  <script src="script.js"></script>
+  <!-- Google Sign-In button -->
+  <div id="g_id_onload"
+       data-client_id="808654019925-ll2ui37okg3itpjrkmj8qmlqrk2iok25.apps.googleusercontent.com"
+       data-callback="handleCredentialResponse">
+  </div>
+  <div class="g_id_signin" data-type="standard"></div>
+
+  <script>
+      function handleCredentialResponse(response) {
+      console.log("Encoded JWT ID token: " + response.credential);
+
+      fetch("http://localhost:5000/api/auth/google", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: response.credential })   // ✅ key must be "token"
+      })
+      .then(res => res.json())
+      .then(data => console.log("Backend response:", data))
+      .catch(err => console.error("Error:", err));
+    }
+
+  </script>
 </body>
 </html>

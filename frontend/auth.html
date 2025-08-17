@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl lg:grid lg:grid-cols-2">
+            
+            <!-- Left Panel with Illustration -->
+            <div class="hidden lg:flex flex-col items-center justify-center p-12 bg-indigo-600 rounded-l-2xl">
+                <div class="w-64 h-64 mb-8">
+                    <!-- Placeholder SVG for illustration -->
+                    <svg class="w-full h-full text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 18C7.55228 18 8 18.4477 8 19C8 19.5523 7.55228 20 7 20C6.44772 20 6 19.5523 6 19C6 18.4477 6.44772 18 7 18Z" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17 18C17.5523 18 18 18.4477 18 19C18 19.5523 17.5523 20 17 20C16.4477 20 16 19.5523 16 19C16 18.4477 16.4477 18 17 18Z" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M19.82 5.99C19.82 5.99 19.64 4.88 18.69 4.14C17.74 3.4 16.38 3.53 16.38 3.53L5.22 4.73L4.12 11.23H18.02C18.02 11.23 19.12 11.33 19.52 10.23C19.92 9.13 19.82 5.99 19.82 5.99Z" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4.12012 11.23L2.02012 15.23H18.5201" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h1 class="text-white text-3xl font-bold text-center">Your Multi-Vendor Marketplace</h1>
+                <p class="text-indigo-200 text-center mt-2">Join thousands of vendors and customers.</p>
+            </div>
+
+            <!-- Right Panel with Form -->
+            <div class="p-8 md:p-12">
+                <!-- Login Form -->
+                <div id="login-form">
+                    <div class="text-right mb-6">
+                        <span class="text-sm text-gray-500 dark:text-gray-400">Not a member?</span>
+                        <a href="#" id="show-signup" class="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">Register now</a>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800 dark:text-white">Hello Again!</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2 mb-8">Welcome back, you've been missed!</p>
+
+                    <form action="#" method="POST">
+                        <div class="mb-5">
+                            <input type="email" name="email" class="w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none transition" placeholder="Enter username" required>
+                        </div>
+                        <div class="mb-5">
+                            <input type="password" name="password" class="w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none transition" placeholder="Password" required>
+                        </div>
+                        <div class="text-right mb-8">
+                             <a href="#" class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">Recovery Password</a>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-800 focus:ring-indigo-500 transition-all duration-300">
+                                Sign In
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="flex items-center my-8">
+                        <hr class="flex-grow border-gray-300 dark:border-gray-600">
+                        <span class="mx-4 text-sm text-gray-400 dark:text-gray-500">Or continue with</span>
+                        <hr class="flex-grow border-gray-300 dark:border-gray-600">
+                    </div>
+
+                    <div class="flex justify-center">
+                        <!-- Google Sign In Button -->
+                        <button class="w-full flex items-center justify-center gap-3 py-3 px-4 border-2 border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                            <svg class="w-5 h-5" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.222,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574l6.19,5.238C39.902,35.688,44,30.413,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path></svg>
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">Sign in with Google</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Signup Form (Initially Hidden) -->
+                <div id="signup-form" class="hidden">
+                    <div class="text-right mb-6">
+                        <span class="text-sm text-gray-500 dark:text-gray-400">Already a member?</span>
+                        <a href="#" id="show-login" class="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">Sign in</a>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800 dark:text-white">Create Account</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2 mb-8">Get started with a free account.</p>
+                    
+                    <form action="#" method="POST">
+                        <div class="mb-5">
+                            <input type="text" name="name" class="w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none transition" placeholder="Full Name" required>
+                        </div>
+                        <div class="mb-5">
+                            <input type="email" name="email" class="w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none transition" placeholder="Email Address" required>
+                        </div>
+                        <div class="mb-8">
+                            <input type="password" name="password" class="w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none transition" placeholder="Password" required>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-800 focus:ring-indigo-500 transition-all duration-300">
+                                Create Account
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="flex items-center my-8">
+                        <hr class="flex-grow border-gray-300 dark:border-gray-600">
+                        <span class="mx-4 text-sm text-gray-400 dark:text-gray-500">Or continue with</span>
+                        <hr class="flex-grow border-gray-300 dark:border-gray-600">
+                    </div>
+
+                    <div class="flex justify-center">
+                        <!-- Google Sign In Button -->
+                        <button class="w-full flex items-center justify-center gap-3 py-3 px-4 border-2 border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                            <svg class="w-5 h-5" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.222,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574l6.19,5.238C39.902,35.688,44,30.413,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path></svg>
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">Sign up with Google</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const showSignup = document.getElementById('show-signup');
+        const showLogin = document.getElementById('show-login');
+
+        showSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.classList.add('hidden');
+            signupForm.classList.remove('hidden');
+        });
+
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupForm.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+        });
+    </script>
+
+</body>
+</html>
