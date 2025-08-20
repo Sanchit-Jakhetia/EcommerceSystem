@@ -2,55 +2,50 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import { OAuth2Client } from "google-auth-library";
+import session from "express-session";
 import authRoutes from "./routes/authRoutes.js";
-
+import path from "path";
+import { fileURLToPath } from "url";
 dotenv.config();
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+async function startServer() {
+  const app = express();
 
-// Middleware
-app.use(express.json());
-app.use(cors());
-app.use("/api/auth", authRoutes);
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ Connected to MongoDB"))
-  .catch(err => console.error("❌ Connection error:", err));
+  app.use(cors());
+  app.use(express.json());
 
-// Google OAuth Client
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-
-// Route: Google Login
-app.post("/api/auth/google", async (req, res) => {
-  try {
-    const { token } = req.body;
-
-    // Verify token with Google
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: process.env.GOOGLE_CLIENT_ID
-    });
-
-    const payload = ticket.getPayload();
-    const { sub, name, email, picture } = payload;
-
-    // (Optional) Save user to DB if new
-    // For now, just return user info
-    res.json({
-      id: sub,
-      name,
-      email,
-      picture
-    });
-
-  } catch (err) {
-    console.error("❌ Google Auth Error:", err);
-    res.status(400).json({ error: "Invalid token" });
-  }
+  // 🔹 Sessions (required by passport)
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET, // use a secure random string
+      resave: false,
+      saveUninitialized: false,
+      cookie: { secure: false }, // set secure:true if using HTTPS
+    })
+  );
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+  // Initialize passport after dotenv config
+  const { default: passport } = await import("./config/passport.js");
+  app.use(passport.initialize());
+  app.use(passport.session());
+app.use(express.static(path.join(__dirname, "public")));
+  // MongoDB
+  mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => console.log("✅ MongoDB Connected"))
+    .catch((err) => console.error("❌ DB Connection error:", err));
+
+  // Routes
+  app.use("/api/auth", authRoutes);
+
+  app.listen(process.env.PORT, () =>
+    console.log(`🚀 Server running on http://localhost:${process.env.PORT}`)
+  );
+}
+
+startServer().catch(console.error);

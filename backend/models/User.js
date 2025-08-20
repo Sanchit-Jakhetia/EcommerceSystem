@@ -18,7 +18,7 @@ const phoneSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   name: String,
   email: { type: String, unique: true },
-  passwordHash: String,
+  password: String,
   role: { type: String, enum: ['buyer', 'seller', 'admin'], default: 'buyer' },
   addresses: [addressSchema],
   phoneNumbers: [phoneSchema],
